@@ -1,0 +1,17 @@
+# Local development harness for this repo.
+#
+#     uv run zensical serve -f dev/mkdocs.yml
+#
+# Lets you preview changes to theme_overlay/ and base.yml before rolling them
+# out to consuming projects. This is NOT what projects consume - see README.
+INHERIT: ../base.yml
+
+site_name: Zensical Base Config
+site_description: Development preview for the shared documentation config.
+
+theme:
+  # base.yml points custom_dir at `docs-config/theme_overlay`, which is correct
+  # for a project that mounts this repo as a submodule. From inside the repo
+  # itself the overlay sits one level up, so we override the scalar here.
+  # (INHERIT overrides scalars, so this replaces the inherited value.)
+  custom_dir: ../theme_overlay

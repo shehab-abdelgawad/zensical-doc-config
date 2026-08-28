@@ -1,0 +1,63 @@
+.md-table-filter__trigger {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0.1em 0.3em;
+  margin-left: 0.3em;
+  color: var(--md-default-fg-color--light);
+  vertical-align: middle;
+}
+
+.md-table-filter__trigger--active {
+  color: var(--md-accent-fg-color);
+}
+
+.md-table-filter__popover {
+  position: fixed;
+  z-index: 1000;
+  background: var(--md-default-bg-color);
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  padding: 0.5em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4em;
+  min-width: 10rem;
+  font-weight: normal;
+  text-transform: none;
+}
+
+.md-table-filter__popover select,
+.md-table-filter__popover input {
+  font-size: 0.7rem;
+  padding: 0.3em;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.2rem;
+  background: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+}
+
+.md-table-filter__actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.md-table-filter__clear {
+  font-size: 0.65rem;
+  background: none;
+  border: none;
+  color: var(--md-accent-fg-color);
+  cursor: pointer;
+  padding: 0;
+}
+
+.md-table-filter__close {
+  font-size: 0.7rem;
+  background: none;
+  border: none;
+  color: var(--md-default-fg-color--light);
+  cursor: pointer;
+  padding: 0 0.2em;
+}

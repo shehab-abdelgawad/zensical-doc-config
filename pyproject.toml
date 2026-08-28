@@ -1,0 +1,9 @@
+[project]
+name = "zensical-doc-config"
+version = "0.1.0"
+description = "Shared Zensical documentation config, consumed as a git submodule."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "zensical==0.0.57",
+]

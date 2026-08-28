@@ -1,0 +1,93 @@
+# Shared Zensical configuration for all projects.
+#
+# Consumed via MkDocs-style configuration inheritance:
+#
+#     # <project>/mkdocs.yml
+#     INHERIT: docs-config/base.yml
+#     site_name: My Project
+#
+# Two things to know before editing:
+#
+#   1. INHERIT *appends* lists (deepmerge.always_merger) and *overrides* scalars.
+#      So a project can add to `extra_css`/`extra_javascript` but cannot remove
+#      or reorder what is defined here. Keys where appending produces nonsense
+#      (`palette`, `nav`) are owned by this file exclusively - see README.
+#
+#   2. `custom_dir` below is resolved relative to the *consuming project's*
+#      config file, not to this file. It therefore assumes this repo is mounted
+#      at `docs-config/`. Projects that mount it elsewhere must override
+#      `theme.custom_dir` in their own mkdocs.yml.
+
+theme:
+  name: material
+  # Ships everything under theme_overlay/ into the built site. This is how the
+  # base CSS/JS below reach projects - Zensical does not follow symlinks out of
+  # `docs_dir`, so the assets cannot live in each project's `docs/`.
+  custom_dir: docs-config/theme_overlay
+  features:
+    - content.code.copy
+    - content.code.select
+    - content.footnote.tooltips
+    - content.tabs.link
+    - navigation.instant
+    - navigation.tracking
+    - search.highlight
+    - search.suggest
+  # Owned by this file: appending a project-level palette would produce a
+  # second `scheme: default` entry and a broken light/dark toggle chain rather
+  # than an override.
+  palette:
+    - scheme: default
+      primary: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+extra_javascript:
+  - https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js
+  - assets/base/tablesort.js
+  - assets/base/katex.js
+  - assets/base/mermaid.mjs
+  - https://unpkg.com/katex@0/dist/katex.min.js
+  - https://unpkg.com/katex@0/dist/contrib/auto-render.min.js
+
+extra_css:
+  - https://unpkg.com/katex@0/dist/katex.min.css
+  - assets/base/table_filter.css
+  - assets/base/mermaid-zoom.css
+
+markdown_extensions:
+  admonition: {}
+  footnotes: {}
+  tables: {}
+  attr_list: {}
+  pymdownx.details: {}
+  pymdownx.inlinehilite: {}
+  pymdownx.snippets: {}
+  pymdownx.arithmatex:
+    generic: true
+  pymdownx.highlight:
+    anchor_linenums: true
+    line_spans: __span
+    pygments_lang_class: true
+  pymdownx.emoji:
+    emoji_index: !!python/name:zensical.extensions.emoji.twemoji
+    emoji_generator: !!python/name:zensical.extensions.emoji.to_svg
+  pymdownx.superfences:
+    custom_fences:
+      # Class is deliberately "mermaid-zoom", not "mermaid", so Zensical's own
+      # built-in mermaid handler never claims these blocks - it renders into a
+      # closed shadow root that svg-pan-zoom cannot reach. See mermaid.mjs.
+      - name: mermaid
+        class: mermaid-zoom
+        format: !!python/name:pymdownx.superfences.fence_code_format
+  pymdownx.tabbed:
+    alternate_style: true
+  pymdownx.tasklist:
+    custom_checkbox: true
+  zensical.extensions.glightbox: {}
