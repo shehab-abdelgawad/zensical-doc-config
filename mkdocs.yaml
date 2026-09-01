@@ -1,0 +1,5 @@
+INHERIT: docs-config/base.yml
+site_name: My Project
+site_description: Developer documentation for My Project.
+site_url: https://example.com/docs/
+repo_url: https://github.com/org/my-project
