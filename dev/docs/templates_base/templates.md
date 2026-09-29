@@ -4,7 +4,7 @@ status: new
 
 # Templates
 
-## Below are templates it speed up your documentation process
+## Below are templates to speed up your documentation process
 
 ### Code Snippets
 
@@ -60,7 +60,7 @@ Without emojis
 | `Revenue`|  200 %           |
 | `Profit` |  0.24            |
 
-### Tabed Content
+### Tabbed Content
 
 #### General Tabs
 
@@ -147,7 +147,7 @@ This is a dummy foot note [^1] This is the second dummy footnote.[^2]
 
 ### Lists
 
-#### Unorderd
+#### Unordered
 
 * A
     * a
@@ -183,7 +183,7 @@ Nested Admonition
     nulla. Curabitur feugiat, tortor non consequat finibus, justo purus auctor
     massa, nec semper lorem quam in massa.
 
-    ??? note "Inner Note (collapsable via ???)"
+    ??? note "Inner Note (collapsible via ???)"
 
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et euismod
         nulla. Curabitur feugiat, tortor non consequat finibus, justo purus auctor
@@ -199,28 +199,28 @@ Nested Admonition
     This is an info
 
 !!! tip
-    This is an tip
+    This is a tip
 
 !!! success
-    This is an success
+    This is a success
 
 !!! question
-    This is an question
+    This is a question
 
 !!! warning
-    This is an warning
+    This is a warning
 
 !!! failure
     This is a failure
 
 !!! danger
-    This is an danger
+    This is a danger
 
 !!! bug
-    This is an bug
+    This is a bug
 
 !!! example
     This is an example
 
 !!! Quote
-    This is an Quote
+    This is a Quote
