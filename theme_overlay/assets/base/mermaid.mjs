@@ -1,5 +1,5 @@
-import mermaid from "https://unpkg.com/mermaid@11/dist/mermaid.esm.min.mjs"
-import elkLayouts from "https://unpkg.com/@mermaid-js/layout-elk@0.2/dist/mermaid-layout-elk.esm.min.mjs"
+import mermaid from "https://unpkg.com/mermaid@11.17.2/dist/mermaid.esm.min.mjs"
+import elkLayouts from "https://unpkg.com/@mermaid-js/layout-elk@0.2.3/dist/mermaid-layout-elk.esm.min.mjs"
 import svgPanZoom from "https://esm.sh/svg-pan-zoom@3.6.2"
 
 // Same selectors/custom properties Zensical's own (shadow-DOM-based, non-interactive)

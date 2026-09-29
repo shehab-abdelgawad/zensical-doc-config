@@ -53,11 +53,11 @@ extra_javascript:
   - assets/base/tablesort.js
   - assets/base/katex.js
   - assets/base/mermaid.mjs
-  - https://unpkg.com/katex@0/dist/katex.min.js
-  - https://unpkg.com/katex@0/dist/contrib/auto-render.min.js
+  - https://unpkg.com/katex@0.18.9/dist/katex.min.js
+  - https://unpkg.com/katex@0.18.9/dist/contrib/auto-render.min.js
 
 extra_css:
-  - https://unpkg.com/katex@0/dist/katex.min.css
+  - https://unpkg.com/katex@0.18.9/dist/katex.min.css
   - assets/base/table_filter.css
   - assets/base/mermaid-zoom.css
 
