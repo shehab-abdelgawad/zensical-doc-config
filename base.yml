@@ -18,6 +18,11 @@
 #      at `docs-config/`. Projects that mount it elsewhere must override
 #      `theme.custom_dir` in their own mkdocs.yml.
 
+# Zensical defaults to 8000, which many other dev servers also claim. Plain
+# `zensical serve` uses this fixed port; scripts/serve.py scans upward from it
+# for the first free one. A project can override this scalar.
+dev_addr: localhost:8200
+
 theme:
   name: material
   # Ships everything under theme_overlay/ into the built site. This is how the

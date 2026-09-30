@@ -44,7 +44,7 @@ uv add 'zensical==0.0.57'
 **5. Build and verify.**
 
 ```bash
-uv run zensical serve
+uv run python docs-config/scripts/serve.py    # first free port from 8200 up
 uv run zensical build && uv run python docs-config/scripts/check_assets.py site
 ```
 
@@ -105,7 +105,7 @@ raise it and we will reshape the overlay.
 
 ```bash
 uv sync
-uv run zensical serve -f dev/mkdocs.yml
+uv run python scripts/serve.py -f dev/mkdocs.yml
 ```
 
 `dev/` is a working consumer site used only to preview changes to `base.yml` and
@@ -140,6 +140,7 @@ theme_overlay/               shipped verbatim into every site via theme.custom_d
     table_filter.css
 scripts/
   check_assets.py            post-build broken-asset check
+  serve.py                   `zensical serve` on the first free port from 8200
   smoke_test.sh              builds a throwaway consumer; run before pushing
 dev/                         local preview harness (not consumed by projects)
 ```
@@ -195,3 +196,13 @@ Pin `zensical==0.0.57` rather than a floating range. This setup relies on
 home for this repo. `base.yml` is deliberately kept a flat list of shared keys
 with no project-specific values so that port stays mechanical. Upgrade
 deliberately, and run the checker afterwards.
+
+### Why a serve wrapper
+
+Zensical's `serve` defaults to `localhost:8000`, which many other dev servers
+also use, and it has no fallback: if the port is taken it exits with "Address
+already in use". `base.yml` moves the default to 8200, so plain `zensical serve`
+avoids the common clash. `scripts/serve.py` goes further and picks the first
+port from 8200 upward that is free on both IPv4 and IPv6 loopback, so several
+documentation sites can be previewed at once. Pass `-a/--dev-addr` to pin a
+port and skip the scan; `--help` lists every option.
