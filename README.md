@@ -205,4 +205,4 @@ already in use". `base.yml` moves the default to 8200, so plain `zensical serve`
 avoids the common clash. `scripts/serve.py` goes further and picks the first
 port from 8200 upward that is free on both IPv4 and IPv6 loopback, so several
 documentation sites can be previewed at once. Pass `-a/--dev-addr` to pin a
-port; the wrapper then passes it through unchanged.
+port and skip the scan; `--help` lists every option.
