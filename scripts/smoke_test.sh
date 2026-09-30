@@ -38,12 +38,13 @@ PROJECT="$WORK/project"
 # pyproject) is deliberate - it is what a real project gets, and assertion 5
 # depends on it.
 mkdir -p "$PROJECT/docs-config"
-# (-c also lists staged-but-deleted paths, which tar would choke on, so keep
-# only what is actually on disk.)
-git -C "$REPO" ls-files -co --exclude-standard -z \
-  | (cd "$REPO" && while IFS= read -r -d '' f; do [[ -e "$f" ]] && printf '%s\0' "$f"; done) \
-  | tar -C "$REPO" --null -T - -cf - \
-  | tar -C "$PROJECT/docs-config" -xf -
+# (-c also lists staged-but-deleted paths, so keep only what is actually on
+# disk.) Plain cp rather than `tar --null -T -`, which busybox tar rejects.
+while IFS= read -r -d '' f; do
+  [[ -e "$REPO/$f" ]] || continue
+  mkdir -p "$PROJECT/docs-config/$(dirname "$f")"
+  cp -P "$REPO/$f" "$PROJECT/docs-config/$f"
+done < <(git -C "$REPO" ls-files -co --exclude-standard -z)
 
 mkdir -p "$PROJECT/docs/stylesheets"
 

@@ -1,30 +1,38 @@
+var openPopover = null
+
+function closeAll() {
+  if (openPopover) {
+    openPopover.remove()
+    openPopover = null
+  }
+}
+
+// Single delegated listeners, set up once per page load. Kept outside
+// document$.subscribe: with navigation.instant that callback runs on every
+// page change, and registering these inside it would stack a new copy each time.
+document.addEventListener("click", function (e) {
+  if (openPopover && !openPopover.contains(e.target) &&
+      !e.target.closest(".md-table-filter__trigger")) {
+    closeAll()
+  }
+})
+document.addEventListener("keydown", function (e) {
+  if (e.key === "Escape") closeAll()
+})
+window.addEventListener("scroll", closeAll, true)
+window.addEventListener("resize", closeAll)
+
 document$.subscribe(function () {
   var tables = document.querySelectorAll("article table:not([class])")
-  var openPopover = null
 
-  function closeAll() {
-    if (openPopover) {
-      openPopover.remove()
-      openPopover = null
-    }
-  }
-
-  // Single delegated listeners, set up once per page load
-  document.addEventListener("click", function (e) {
-    if (openPopover && !openPopover.contains(e.target) &&
-        !e.target.closest(".md-table-filter__trigger")) {
-      closeAll()
-    }
-  })
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape") closeAll()
-  })
-  window.addEventListener("scroll", closeAll, true)
-  window.addEventListener("resize", closeAll)
+  // The popover lives on <body>, which instant navigation does not replace.
+  closeAll()
 
   tables.forEach(function (table) {
     if (table.dataset.filterable) return
     table.dataset.filterable = "true"
+
+    if (typeof Tablesort !== "undefined") new Tablesort(table)
 
     var thead = table.tHead
     var tbody = table.tBodies[0]
@@ -66,7 +74,6 @@ document$.subscribe(function () {
     var filters = {}
 
     function applyFilters() {
-      var visible = 0
       rows.forEach(function (row) {
         var match = Object.keys(filters).every(function (colIndex) {
           var f = filters[colIndex]
@@ -93,9 +100,7 @@ document$.subscribe(function () {
           return true
         })
         row.hidden = !match
-        if (match) visible++
       })
-      table.hidden = visible === 0
     }
 
     headerCells.forEach(function (th, colIndex) {
